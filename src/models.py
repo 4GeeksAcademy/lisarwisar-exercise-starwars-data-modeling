@@ -26,15 +26,31 @@ class Characters(Base):
 class Planets(Base):
     __tablename__ = "planets"
     name = Column(String(250), primary_key=True)
-
+    diameter = Column(String(250), nullable=False)
+    rotation_period = Column(String(250), nullable=False)
+    orbital_period = Column(String(250), nullable=False)
+    gravity = Column(String(250), nullable=False)
+    population = Column(String(250), nullable=False)
+    climate = Column(String(250), nullable=False)
+    terrain = Column(String(250), nullable=False)
+    surface_water = Column(String(250), nullable=False)
+    residents = Column(String(250), nullable=False)
+    films = Column(String(250), nullable=False)
+                                                 
 
 class Favorite_Characters(Base):
-    __tablename__ = "favorites"
-    character_name = Column(String(250), ForeignKey("character.name"), primary_key=True)
-    user_id = Column(Integer, ForeignKey("user.id"))
+    __tablename__ = "favorite characters"
+    user_id = Column(Integer, ForeignKey("user.id"), primary_key=True)
+    character_name = Column(String(250), ForeignKey("character.name"))
     character = relationship(Characters)
     user = relationship(User)
 
+class Favorite_Planets(Base):
+    __tablename__ = "favorite planets"
+    user_id = Column(Integer, ForeignKey("user.id"), primary_key=True)
+    planet_name = Column(String(250), ForeignKey("planet.name"))
+    user = relationship(User)
+    planet = relationship(Planets)
 
 
 
