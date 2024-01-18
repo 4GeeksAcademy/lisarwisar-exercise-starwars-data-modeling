@@ -10,6 +10,7 @@ Base = declarative_base()
 class User(Base):
     __tablename__ = 'user'
     id = Column(Integer, primary_key=True)
+    email = Column(String(250), primary_key=True)
     name = Column(String(250), nullable=False)
     password = Column(String(250), nullable=False)
 
@@ -40,19 +41,17 @@ class Planets(Base):
 
 class Favorite_Characters(Base):
     __tablename__ = "favorite characters"
-    user_id = Column(Integer, ForeignKey("user.id"), primary_key=True)
-    character_name = Column(String(250), ForeignKey("character.name"))
+    user_id = Column(Integer, ForeignKey("user.id"))
+    character_name = Column(String(250), ForeignKey("character.name"), primary_key=True)
     character = relationship(Characters)
     user = relationship(User)
 
 class Favorite_Planets(Base):
     __tablename__ = "favorite planets"
-    user_id = Column(Integer, ForeignKey("user.id"), primary_key=True)
-    planet_name = Column(String(250), ForeignKey("planet.name"))
+    user_id = Column(Integer, ForeignKey("user.id"))
+    planet_name = Column(String(250), ForeignKey("planet.name"), primary_key=True)
     user = relationship(User)
     planet = relationship(Planets)
-
-
 
 
 ## Draw from SQLAlchemy base
