@@ -37,19 +37,26 @@ class Planets(Base):
     surface_water = Column(String(250), nullable=False)
     residents = Column(String(250), nullable=False)
     films = Column(String(250), nullable=False)
+
+class Items(Base):
+    __tablename__ = "items"
+    item_id = Column(Integer, primary_key=True)
+
                                                  
 
 class Favorite_Characters(Base):
     __tablename__ = "favorite characters"
+    user_character_id = Column(Integer, primary_key=True)
     user_id = Column(Integer, ForeignKey("user.id"))
-    character_name = Column(String(250), ForeignKey("character.name"), primary_key=True)
+    character_name = Column(String(250), ForeignKey("character.name"))
     character = relationship(Characters)
     user = relationship(User)
 
 class Favorite_Planets(Base):
     __tablename__ = "favorite planets"
+    user_planer_id = Column(Integer, primary_key=True)
     user_id = Column(Integer, ForeignKey("user.id"))
-    planet_name = Column(String(250), ForeignKey("planet.name"), primary_key=True)
+    planet_name = Column(String(250), ForeignKey("planet.name"))
     user = relationship(User)
     planet = relationship(Planets)
 
